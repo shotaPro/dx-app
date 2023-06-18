@@ -52,10 +52,12 @@
                         <div
                           class="text-left text-base font-medium leading-none text-white"
                         >
+                          {{ user.name }}
                         </div>
                         <div
                           class="text-sm font-medium leading-none text-gray-400"
                         >
+                          {{ user.email }}
                         </div>
                       </div>
                       <svg
@@ -191,7 +193,6 @@
 
   const navigation = [
     { name: "Dashboard", to: { name: "Dashboard" } },
-    { name: "surveys", to: { name: "Surveys" } },
   ];
 
   export default {
@@ -203,6 +204,10 @@
       MenuButton,
       MenuItem,
       MenuItems,
+    //   BellIcon,
+    //   MenuIcon,
+    //   XIcon,
+    //   Notification,
     },
     setup() {
       const store = useStore();
@@ -210,19 +215,20 @@
 
       function logout() {
         store.dispatch("logout").then(() => {
+            sessionStorage.removeItem('token');
           router.push({
             name: "Login",
           });
         });
       }
 
-    //   store.dispatch("getUser");
+      store.dispatch("getUser");
 
-    //   return {
-    //     user: computed(() => store.state.user.data),
-    //     navigation,
-    //     logout,
-    //   };
+      return {
+        user: computed(() => store.state.user.data),
+        navigation,
+        logout,
+      };
     },
   };
   </script>

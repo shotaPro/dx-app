@@ -147,13 +147,13 @@ function register(ev) {
     store
         .dispatch("register", user)
         .then(() => {
-            loading.value = false;
+            // loading.value = false;
             router.push({
                 name: "Dashboard",
             });
         })
         .catch((error) => {
-            loading.value = false;
+            // loading.value = false;
             if (error.response.status === 422) {
                 errors.value = error.response.data.errors;
             }
